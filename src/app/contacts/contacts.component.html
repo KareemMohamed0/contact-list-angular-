@@ -1,0 +1,67 @@
+<div class="head">
+  <h3> Contact List</h3>
+</div>
+
+<div class="container">
+  <div>
+    <span style="margin: 0 20px;">Add new contact : </span>
+    <button style="display: inline" type="button" (click)="modal = true" class="btn btn-primary btn-lg" data-toggle="modal">Add</button>
+  </div>
+  <div *ngFor="let contact of contacts">
+    <div class="card">
+      <div class="row">
+        <div class="col-md-3">
+          <img [src]="contact.profileImage" width="50px" height="50px;" style="border-radius: 50%" class="img" alt="" />
+        </div>
+        <div class="col-md-3"> Name : {{contact.name}} </div>
+        <div class="col-md-3"> Emil : {{contact.email}} </div>
+        <div class="col-md-3"> Emil : {{contact.age}} </div>
+        <!--<div class="col-md-3"> <input type="button" (click)="deleteContact(contact._id)" value="Delete" class="btn btn-deafult"> </div>-->
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Modal -->
+<div [ngClass]="{'custom-modal-container': modal}" (click)="modal = false">
+</div>
+<div id="ContactModal" [ngClass]="{'custom-modal-content': modal}" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Contact</h4>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)='addContact(cont)'>
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" [(ngModel)]="cont.first_name" name="fname" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" [(ngModel)]="cont.last_name" name="lname" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="text" [(ngModel)]="cont.phone" name="phone" class="form-control">
+          </div>
+          <input type="submit" class="btn btn-primary  btn-lg" value="Add">
+
+          <div style="margin-top: 20px;" *ngIf="errMessage" class="alert alert-dismissible alert-danger">
+            <strong>{{errMessage}} !</strong>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modal = false">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
